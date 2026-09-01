@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
       navMenu.classList.toggle('is-active');
     });
 
+    // Close menu when clicking nav links
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('is-active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
     // Close menu when clicking outside
     document.addEventListener('click', (event) => {
       if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
