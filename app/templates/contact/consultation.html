@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Book a Consultation — MVR Associates Business & Legal Consultancy{% endblock %}
+
+{% block meta_description %}Book a confidential business, financial, tax, or legal consultation appointment with MVR Associates principal advisors.{% endblock %}
+
+{% block content %}
+<section class="section section-lg bg-surface" style="border-bottom: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Strategic Advisory</span>
+      <h1 class="text-display mb-4">Book a Consultation Appointment</h1>
+      <p class="text-lead section-subtitle">
+        Schedule a dedicated 1-on-1 advisory session with our principal consultant to analyze your business financial structure, tax planning, or legal agreements.
+      </p>
+      <div class="mt-4">
+        <div class="credential-pill">
+          M.Com &nbsp;|&nbsp; CMA &nbsp;|&nbsp; LL.B
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-alt">
+  <div class="container" style="max-width: 900px;">
+    <div class="card card-featured" style="padding: 2.5rem;">
+      <h2 class="mb-2" style="font-size: 1.625rem;">Consultation Details</h2>
+      <p class="text-small text-muted mb-6">
+        Select your preferred date, time slot, and core area of interest. All consultation sessions are held under strict non-disclosure standards.
+      </p>
+
+      <form method="POST" action="{{ url_for('contact.consultation') }}" onsubmit="if(this.checkValidity()){ this.querySelector('button[type=submit]').disabled=true; this.querySelector('button[type=submit]').innerHTML='Booking Appointment...'; }">
+        {{ form.csrf_token }}
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name <span style="color: var(--color-danger-700);">*</span></label>
+            {{ form.name(class="form-control " + ("is-invalid" if form.name.errors else ""), placeholder="e.g. Ramesh Varma") }}
+            {% for error in form.name.errors %}
+              <div class="form-error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address <span style="color: var(--color-danger-700);">*</span></label>
+            {{ form.email(class="form-control " + ("is-invalid" if form.email.errors else ""), placeholder="ramesh@enterprise.com") }}
+            {% for error in form.email.errors %}
+              <div class="form-error">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number <span style="color: var(--color-danger-700);">*</span></label>
+            {{ form.phone(class="form-control " + ("is-invalid" if form.phone.errors else ""), placeholder="+91 98765 43210") }}
+            {% for error in form.phone.errors %}
+              <div class="form-error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            <label for="business_name" class="form-label">Business / Enterprise Name</label>
+            {{ form.business_name(class="form-control " + ("is-invalid" if form.business_name.errors else ""), placeholder="e.g. Varma Industries") }}
+            {% for error in form.business_name.errors %}
+              <div class="form-error">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="service_id" class="form-label">Consultation Subject / Service Area</label>
+          {{ form.service_id(class="form-select " + ("is-invalid" if form.service_id.errors else "")) }}
+          {% for error in form.service_id.errors %}
+            <div class="form-error">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="preferred_date" class="form-label">Preferred Date <span style="color: var(--color-danger-700);">*</span></label>
+            {{ form.preferred_date(class="form-control " + ("is-invalid" if form.preferred_date.errors else ""), type="date") }}
+            {% for error in form.preferred_date.errors %}
+              <div class="form-error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            <label for="preferred_time" class="form-label">Preferred Time Slot <span style="color: var(--color-danger-700);">*</span></label>
+            {{ form.preferred_time(class="form-select " + ("is-invalid" if form.preferred_time.errors else "")) }}
+            {% for error in form.preferred_time.errors %}
+              <div class="form-error">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">Key Topics / Specific Questions</label>
+          {{ form.message(class="form-textarea " + ("is-invalid" if form.message.errors else ""), placeholder="Briefly describe the topics or questions you wish to cover during the consultation session...") }}
+          {% for error in form.message.errors %}
+            <div class="form-error">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="card mb-6" style="padding: 1rem 1.25rem; background: var(--color-navy-50); border-color: var(--color-navy-200);">
+          <div class="flex items-center gap-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span class="text-xs text-muted" style="color: var(--color-navy-900); font-weight: 500;">
+              Confidentiality Notice: All information submitted is strictly confidential and protected under standard NDA protocols.
+            </span>
+          </div>
+        </div>
+
+        <div>
+          {{ form.submit(class="btn btn-gold btn-lg btn-full") }}
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

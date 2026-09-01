@@ -1,0 +1,59 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}{% if service %}Edit Service{% else %}Create Service{% endif %} — MVR Associates Admin{% endblock %}
+{% block header_title %}{% if service %}Edit Service: {{ service.title }}{% else %}Create New Service{% endif %}{% endblock %}
+
+{% block content %}
+<div class="admin-card" style="max-width: 800px;">
+  <form method="POST" action="{% if service %}{{ url_for('admin.edit_service', service_id=service.id) }}{% else %}{{ url_for('admin.create_service') }}{% endif %}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Service Title <span style="color: #EF4444;">*</span></label>
+      <input type="text" name="title" value="{{ service.title if service else '' }}" required class="form-control" placeholder="e.g. Accounting & Bookkeeping" style="background: #090D16; border-color: #334155; color: #FFF;">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" style="color: #94A3B8;">URL Slug (auto-generated if blank)</label>
+        <input type="text" name="slug" value="{{ service.slug if service else '' }}" class="form-control" placeholder="accounting-bookkeeping" style="background: #090D16; border-color: #334155; color: #FFF;">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" style="color: #94A3B8;">Icon Identifier</label>
+        <input type="text" name="icon" value="{{ service.icon if service else 'calculator' }}" class="form-control" placeholder="calculator, file-text, scale..." style="background: #090D16; border-color: #334155; color: #FFF;">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Short Summary / Meta Description <span style="color: #EF4444;">*</span></label>
+      <textarea name="short_description" required class="form-textarea" placeholder="Brief 1-2 sentence overview shown on service cards..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 80px;">{{ service.short_description if service else '' }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Full Overview Content <span style="color: #EF4444;">*</span></label>
+      <textarea name="full_description" required class="form-textarea" placeholder="Comprehensive detail page overview paragraph..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 140px;">{{ service.description if service else '' }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Problems Addressed (Comma or line separated)</label>
+      <textarea name="problems_addressed" class="form-textarea" placeholder="e.g. Backlog in bookkeeping, Inaccurate ledger balances..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 80px;">{% if service %}{{ service.problems_addressed|join('\n') }}{% endif %}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Services Included (Comma or line separated)</label>
+      <textarea name="services_included" class="form-textarea" placeholder="e.g. Daily transaction recording, Bank reconciliations..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 80px;">{% if service %}{{ service.services_included|join('\n') }}{% endif %}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Key Benefits (Comma or line separated)</label>
+      <textarea name="benefits" class="form-textarea" placeholder="e.g. 100% statutory compliance, Financial clarity..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 80px;">{% if service %}{{ service.benefits|join('\n') }}{% endif %}</textarea>
+    </div>
+
+    <div class="flex items-center gap-4 mt-6">
+      <button type="submit" class="btn btn-gold">{% if service %}Save Service Changes{% else %}Create Service{% endif %}</button>
+      <a href="{{ url_for('admin.services') }}" class="btn btn-secondary" style="color: #94A3B8; border-color: #334155;">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

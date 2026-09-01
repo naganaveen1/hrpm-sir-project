@@ -1,0 +1,85 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Consultations Management — MVR Associates Admin{% endblock %}
+{% block header_title %}Consultation Requests Management{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+  <!-- SEARCH AND FILTER BAR -->
+  <form method="GET" action="{{ url_for('admin.consultations') }}" class="flex justify-between items-center mb-6" style="gap: 1rem; flex-wrap: wrap;">
+    <div class="flex items-center gap-3" style="flex: 1; min-width: 250px;">
+      <input type="text" name="q" value="{{ search_query or '' }}" placeholder="Search client name, email, or phone..." class="form-control" style="background: #090D16; border-color: #334155; color: #FFF;">
+      <select name="status" class="form-select" style="background: #090D16; border-color: #334155; color: #FFF; width: 180px;">
+        <option value="">All Statuses</option>
+        <option value="New" {% if status_filter == 'New' %}selected{% endif %}>New</option>
+        <option value="Confirmed" {% if status_filter == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+        <option value="Completed" {% if status_filter == 'Completed' %}selected{% endif %}>Completed</option>
+        <option value="Cancelled" {% if status_filter == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+      </select>
+      <button type="submit" class="btn btn-gold btn-sm">Filter</button>
+      {% if search_query or status_filter %}
+        <a href="{{ url_for('admin.consultations') }}" class="btn btn-secondary btn-sm" style="color: #94A3B8; border-color: #334155;">Reset</a>
+      {% endif %}
+    </div>
+  </form>
+
+  <!-- CONSULTATIONS TABLE -->
+  {% if consultations %}
+    <div style="overflow-x: auto;">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Client Info</th>
+            <th>Preferred Slot</th>
+            <th>Subject / Notes</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cons in consultations %}
+            <tr>
+              <td>#{{ cons.id }}</td>
+              <td>
+                <strong style="color: #FFF;">{{ cons.name }}</strong>
+                {% if cons.business_name %}<br><span class="text-xs text-gold-accent">{{ cons.business_name }}</span>{% endif %}
+                <br><span class="text-xs text-muted">{{ cons.email }} | {{ cons.phone }}</span>
+              </td>
+              <td>
+                <strong style="color: #4ADE80;">{{ cons.preferred_date }}</strong>
+                <br><span class="text-xs text-muted">{{ cons.preferred_time }}</span>
+              </td>
+              <td style="max-width: 250px;">
+                {% if cons.service %}
+                  <span class="badge badge-gold mb-1">{{ cons.service.title }}</span><br>
+                {% endif %}
+                <span class="text-small text-muted">{{ cons.message or 'No specific notes' }}</span>
+              </td>
+              <td>
+                <!-- STATUS UPDATE FORM -->
+                <form method="POST" action="{{ url_for('admin.update_consultation_status', consultation_id=cons.id) }}" style="display: inline-block;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <select name="status" onchange="this.form.submit()" class="form-select text-xs" style="padding: 0.25rem 0.5rem; background: #090D16; border-color: #334155; color: #FFF;">
+                    {% for st in ['New', 'Confirmed', 'Completed', 'Cancelled'] %}
+                      <option value="{{ st }}" {% if cons.status == st %}selected{% endif %}>{{ st }}</option>
+                    {% endfor %}
+                  </select>
+                </form>
+              </td>
+              <td>
+                <form method="POST" action="{{ url_for('admin.delete_consultation', consultation_id=cons.id) }}" onsubmit="return confirm('Are you sure you want to delete this consultation request?');" style="display: inline-block;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.25rem 0.5rem;">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted text-center py-6">No consultations match your search criteria.</p>
+  {% endif %}
+</div>
+{% endblock %}

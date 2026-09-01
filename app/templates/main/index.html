@@ -1,0 +1,520 @@
+{% extends 'base.html' %}
+
+{% block title %}MVR Associates — Business, Financial, Tax & Legal Consultancy{% endblock %}
+
+{% block meta_description %}MVR Associates delivers expert Accounting, GST & Tax Services, Business Advisory, Loan Assistance, Legal Documentation, and HR/Payroll consultancy. M.Com | CMA | LL.B.{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="section section-lg bg-surface" style="position: relative; overflow: hidden; border-bottom: 1px solid var(--color-border-light);">
+  <!-- Subtle decorative background gradient -->
+  <div style="position: absolute; top: -10%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(197, 160, 89, 0.07) 0%, rgba(255,255,255,0) 70%); pointer-events: none;"></div>
+  
+  <div class="container">
+    <div class="grid grid-cols-2" style="align-items: center; gap: 3.5rem;">
+      <div>
+        <div class="credential-pill mb-4" style="margin-bottom: 1.25rem;">
+          M.Com &nbsp;|&nbsp; CMA &nbsp;|&nbsp; LL.B
+        </div>
+        
+        <h1 class="text-display mb-4">Build. Manage. Grow.</h1>
+        
+        <p class="text-h3 text-gold-accent mb-4" style="font-weight: 600; font-size: 1.25rem; line-height: 1.4;">
+          Professional Business, Financial, Tax & Legal Consultancy for Growing Businesses.
+        </p>
+        
+        <p class="text-lead mb-8" style="margin-bottom: 2rem;">
+          MVR Associates helps entrepreneurs, startups, and corporate organizations navigate complex business operational demands through integrated advisory in management accounting, taxation, bank project reports, statutory compliance, and legal documentation.
+        </p>
+        
+        <div class="flex" style="gap: 1rem; flex-wrap: wrap;">
+          <a href="{{ url_for('contact.consultation') }}" class="btn btn-gold btn-lg">Book a Consultation</a>
+          <a href="#services" class="btn btn-secondary btn-lg">Explore Services</a>
+        </div>
+
+        <div class="grid grid-cols-3 mt-8" style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--color-border-light);">
+          <div>
+            <strong style="display: block; color: var(--color-navy-900); font-size: 1.125rem;">Multi-Disciplinary</strong>
+            <span class="text-xs text-muted">Commerce, Tax & Law</span>
+          </div>
+          <div>
+            <strong style="display: block; color: var(--color-navy-900); font-size: 1.125rem;">Confidential</strong>
+            <span class="text-xs text-muted">100% Data Privacy</span>
+          </div>
+          <div>
+            <strong style="display: block; color: var(--color-navy-900); font-size: 1.125rem;">Pragmatic</strong>
+            <span class="text-xs text-muted">Actionable Advisory</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Card Architecture (No Stock Imagery) -->
+      <div>
+        <div class="card card-dark" style="padding: 2.5rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 1px solid rgba(197, 160, 89, 0.3); background: linear-gradient(145deg, #0B192C 0%, #12243B 100%);">
+          <div class="flex items-center justify-between mb-4">
+            <span class="badge badge-gold">Advisory Matrix</span>
+            <span class="text-xs" style="color: var(--color-gold-400); font-weight: 600;">MVR ASSOCIATES</span>
+          </div>
+          
+          <h3 class="mb-4" style="color: #FFFFFF; font-size: 1.35rem;">Integrated Professional Expertise</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-gold-500); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="color: #FFFFFF; font-size: 0.9375rem; display: block;">Financial & Cost Management</strong>
+                <span class="text-xs" style="color: var(--color-charcoal-300);">Accounting, Bookkeeping & CMA Advisory</span>
+              </div>
+              <span class="badge badge-navy" style="background: rgba(255,255,255,0.1); color: var(--color-gold-400);">M.Com / CMA</span>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-gold-500); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="color: #FFFFFF; font-size: 0.9375rem; display: block;">Taxation & Compliance</strong>
+                <span class="text-xs" style="color: var(--color-charcoal-300);">GST Filings, Tax Planning & Audits</span>
+              </div>
+              <span class="badge badge-navy" style="background: rgba(255,255,255,0.1); color: var(--color-gold-400);">Tax Expertise</span>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-gold-500); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="color: #FFFFFF; font-size: 0.9375rem; display: block;">Legal Counsel & Contracts</strong>
+                <span class="text-xs" style="color: var(--color-charcoal-300);">Deeds, NDAs, Agreements & Corporate Support</span>
+              </div>
+              <span class="badge badge-navy" style="background: rgba(255,255,255,0.1); color: var(--color-gold-400);">LL.B Backed</span>
+            </div>
+          </div>
+
+          <div style="padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);" class="flex items-center justify-between">
+            <span class="text-xs" style="color: var(--color-charcoal-300);">Looking for custom business advisory?</span>
+            <a href="{{ url_for('contact.consultation') }}" class="btn btn-gold btn-sm">Get Started &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS SECTION -->
+<section class="section-sm bg-alt" style="border-bottom: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="flex items-center justify-between" style="flex-wrap: wrap; gap: 1.5rem;">
+      <div>
+        <span class="text-label" style="color: var(--color-gold-600);">Academic & Professional Credentials</span>
+        <h2 style="font-size: 1.5rem; margin-top: 0.25rem;">Multi-Disciplinary Expertise You Can Trust</h2>
+      </div>
+      <div class="flex" style="gap: 1rem; flex-wrap: wrap;">
+        <div class="card" style="padding: 0.75rem 1.25rem; flex-direction: row; align-items: center; gap: 0.75rem; border-left: 3px solid var(--color-navy-900);">
+          <strong style="color: var(--color-navy-900); font-size: 1.125rem;">M.Com</strong>
+          <span class="text-xs text-muted">Master of Commerce</span>
+        </div>
+        <div class="card" style="padding: 0.75rem 1.25rem; flex-direction: row; align-items: center; gap: 0.75rem; border-left: 3px solid var(--color-gold-500);">
+          <strong style="color: var(--color-navy-900); font-size: 1.125rem;">CMA</strong>
+          <span class="text-xs text-muted">Management Accountant</span>
+        </div>
+        <div class="card" style="padding: 0.75rem 1.25rem; flex-direction: row; align-items: center; gap: 0.75rem; border-left: 3px solid var(--color-navy-900);">
+          <strong style="color: var(--color-navy-900); font-size: 1.125rem;">LL.B</strong>
+          <span class="text-xs text-muted">Bachelor of Laws</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="section bg-surface">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Core Offerings</span>
+      <h2 class="section-title">Comprehensive Consultancy Services</h2>
+      <p class="text-lead section-subtitle">
+        End-to-end advisory solutions bridging accounting, taxation, financial growth, statutory compliance, and commercial legal protection.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-3">
+      <!-- Service 1: Accounting & Bookkeeping -->
+      <div class="card card-interactive">
+        <div class="card-body">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          </div>
+          <h3>Accounting & Bookkeeping</h3>
+          <p class="text-small text-muted mt-4">
+            Professional maintenance of books of accounts, balance sheet preparation, profit & loss management, cash flow oversight, and financial reporting.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('services.detail', slug='accounting-bookkeeping') }}" class="btn btn-secondary btn-sm btn-full">Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Service 2: GST & Tax Services -->
+      <div class="card card-interactive card-featured">
+        <div class="card-body">
+          <div class="card-icon" style="background: var(--color-gold-100); color: var(--color-gold-600); border-color: var(--color-gold-200);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3>GST & Tax Services</h3>
+          <p class="text-small text-muted mt-4">
+            GST registration, GSTR-1, GSTR-3B & annual filings, Income Tax return filing, tax optimization, statutory audit coordination, and assessment representation.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('services.detail', slug='gst-taxation') }}" class="btn btn-gold btn-sm btn-full">Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Service 3: Business Consultancy -->
+      <div class="card card-interactive">
+        <div class="card-body">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
+          </div>
+          <h3>Business Consultancy</h3>
+          <p class="text-small text-muted mt-4">
+            Strategic business planning, entity selection, cost reduction advisory, profit margin enhancement, and structural growth strategies.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('services.detail', slug='business-consultancy') }}" class="btn btn-secondary btn-sm btn-full">Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Service 4: Finance & Loan Assistance -->
+      <div class="card card-interactive">
+        <div class="card-body">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+          </div>
+          <h3>Finance & Loan Assistance</h3>
+          <p class="text-small text-muted mt-4">
+            Comprehensive project report preparation, CMA data drafting for bank credit lines, MSME loan syndication, and financial feasibility reports.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('services.detail', slug='finance-loan-assistance') }}" class="btn btn-secondary btn-sm btn-full">Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Service 5: Legal Documentation -->
+      <div class="card card-interactive card-featured">
+        <div class="card-body">
+          <div class="card-icon" style="background: var(--color-gold-100); color: var(--color-gold-600); border-color: var(--color-gold-200);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path><path d="M10 9H8"></path></svg>
+          </div>
+          <h3>Legal Documentation</h3>
+          <p class="text-small text-muted mt-4">
+            LL.B qualified drafting of partnership deeds, commercial contracts, non-disclosure agreements (NDAs), vendor terms, and legal notices.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('services.detail', slug='legal-documentation') }}" class="btn btn-gold btn-sm btn-full">Learn More &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Service 6: HR & Payroll Consultancy -->
+      <div class="card card-interactive">
+        <div class="card-body">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3>HR & Payroll Consultancy</h3>
+          <p class="text-small text-muted mt-4">
+            End-to-end payroll processing, Provident Fund (PF) & ESI compliance, employment agreement structures, HR policy design, and labor law advisory.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('services.detail', slug='hr-payroll-consultancy') }}" class="btn btn-secondary btn-sm btn-full">Learn More &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MVR ASSOCIATES -->
+<section class="section bg-alt" style="border-top: 1px solid var(--color-border-light); border-bottom: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Value Proposition</span>
+      <h2 class="section-title">Why Partner With MVR Associates</h2>
+      <p class="text-lead section-subtitle">
+        We combine rigorous academic credentials with hands-on business execution to deliver seamless advisory across finance and law.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-3">
+      <div class="card" style="padding: 2rem;">
+        <div class="text-gold-accent mb-4" style="font-size: 1.5rem; font-weight: 700;">01.</div>
+        <h3 class="mb-4">Professional Knowledge</h3>
+        <p class="text-small text-muted">
+          Formal qualifications across Commerce (M.Com), Cost Accounting (CMA), and Law (LL.B) ensure holistic coverage for complex business decisions.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 2rem;">
+        <div class="text-gold-accent mb-4" style="font-size: 1.5rem; font-weight: 700;">02.</div>
+        <h3 class="mb-4">Practical Solutions</h3>
+        <p class="text-small text-muted">
+          We avoid vague jargon and focus strictly on pragmatic, actionable solutions tailored to your operational realities and financial goals.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 2rem;">
+        <div class="text-gold-accent mb-4" style="font-size: 1.5rem; font-weight: 700;">03.</div>
+        <h3 class="mb-4">Customized Service</h3>
+        <p class="text-small text-muted">
+          Every client receives bespoke advisory built around their specific industry, company scale, tax profile, and risk management needs.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 2rem;">
+        <div class="text-gold-accent mb-4" style="font-size: 1.5rem; font-weight: 700;">04.</div>
+        <h3 class="mb-4">Strict Confidentiality</h3>
+        <p class="text-small text-muted">
+          Your financial data, tax records, and legal matters are guarded with strict professional confidentiality standards and security practices.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 2rem;">
+        <div class="text-gold-accent mb-4" style="font-size: 1.5rem; font-weight: 700;">05.</div>
+        <h3 class="mb-4">Transparent Process</h3>
+        <p class="text-small text-muted">
+          Clear timelines, upfront cost expectations, and transparent status updates at every stage of statutory filing or project report generation.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 2rem;">
+        <div class="text-gold-accent mb-4" style="font-size: 1.5rem; font-weight: 700;">06.</div>
+        <h3 class="mb-4">Long-Term Support</h3>
+        <p class="text-small text-muted">
+          We act as your long-term strategic growth partner as your enterprise scales from initial registration to expansion.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS SOLUTIONS BY STAGE -->
+<section class="section bg-surface">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Strategic Growth Matrix</span>
+      <h2 class="section-title">Solutions Tailored to Your Business Stage</h2>
+      <p class="text-lead section-subtitle">
+        Whether launching a new enterprise or managing an established corporate entity, MVR Associates offers targeted support.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-3">
+      <!-- Stage 1: Startup -->
+      <div class="card card-interactive card-featured">
+        <div class="card-body">
+          <span class="badge badge-gold mb-4">Stage 01</span>
+          <h3>Startup Business</h3>
+          <p class="text-small text-muted mt-4 mb-4">
+            Structured support for early-stage founders to establish compliant, tax-optimized foundations.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--color-charcoal-700);">
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-600)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Business Planning & Structuring
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-600)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              GST Registration & Setup
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-600)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Initial Loan Project Reports
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-600)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Founders Agreements & Deeds
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('main.solutions') }}" class="btn btn-gold btn-sm btn-full">Explore Startup Advisory</a>
+        </div>
+      </div>
+
+      <!-- Stage 2: Growing Business -->
+      <div class="card card-interactive">
+        <div class="card-body">
+          <span class="badge badge-navy mb-4">Stage 02</span>
+          <h3>Growing Business</h3>
+          <p class="text-small text-muted mt-4 mb-4">
+            Cost optimization and statutory compliance for expanding commercial operations.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--color-charcoal-700);">
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Cost Control & Management Accounts
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Monthly GST & Income Tax Advisory
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Bank Loan & Credit Line Syndication
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              HR Payroll & Labor Compliance
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('main.solutions') }}" class="btn btn-secondary btn-sm btn-full">Explore Growth Advisory</a>
+        </div>
+      </div>
+
+      <!-- Stage 3: Established Enterprise -->
+      <div class="card card-interactive">
+        <div class="card-body">
+          <span class="badge badge-navy mb-4">Stage 03</span>
+          <h3>Established Enterprise</h3>
+          <p class="text-small text-muted mt-4 mb-4">
+            Advanced risk management, statutory audit readiness, and complex legal documentation.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--color-charcoal-700);">
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Internal Financial Control Audits
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Tax Assessment & Appeals Support
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Complex Commercial Contracts & NDAs
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-900)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Corporate Advisory & Compliance
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('main.solutions') }}" class="btn btn-secondary btn-sm btn-full">Explore Corporate Advisory</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS SECTION -->
+<section class="section bg-alt" style="border-top: 1px solid var(--color-border-light); border-bottom: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Our Methodology</span>
+      <h2 class="section-title">Structured 6-Step Advisory Process</h2>
+      <p class="text-lead section-subtitle">
+        A systematic, quality-focused approach ensuring complete compliance, strategic precision, and measurable business outcomes.
+      </p>
+    </div>
+
+    <div class="process-timeline">
+      <div class="process-step">
+        <div class="process-number">01</div>
+        <div class="process-title">Understand</div>
+        <p class="text-xs text-muted mt-4">In-depth consultation to map business model & requirements.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-number">02</div>
+        <div class="process-title">Analyse</div>
+        <p class="text-xs text-muted mt-4">Review financial data, tax profile, and legal frameworks.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-number">03</div>
+        <div class="process-title">Plan</div>
+        <p class="text-xs text-muted mt-4">Formulate custom action plan & compliance roadmap.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-number">04</div>
+        <div class="process-title">Implement</div>
+        <p class="text-xs text-muted mt-4">Execute return filings, documentation & report preparation.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-number">05</div>
+        <div class="process-title">Review</div>
+        <p class="text-xs text-muted mt-4">Rigorous quality verification before statutory submission.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-number">06</div>
+        <div class="process-title">Improve</div>
+        <p class="text-xs text-muted mt-4">Continuous advisory for long-term tax & operational efficiency.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+{% if testimonials %}
+<section class="section bg-surface" style="border-top: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Client Feedback</span>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="text-lead section-subtitle">
+        Read genuine reviews and recommendations from enterprise leaders and business owners who trust MVR Associates.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-3" style="gap: 1.5rem;">
+      {% for t in testimonials %}
+      <div class="card" style="padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-surface-elevated, #FFFFFF); border: 1px solid var(--color-border-light);">
+        <div>
+          <!-- Star Rating -->
+          <div style="display: flex; gap: 0.25rem; color: #F59E0B; margin-bottom: 1rem;">
+            {% for i in range(t.rating) %}
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            {% endfor %}
+          </div>
+          <p style="font-size: 0.9375rem; color: var(--color-charcoal-700); line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">
+            "{{ t.content }}"
+          </p>
+        </div>
+        <div style="border-top: 1px solid var(--color-border-light); padding-top: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-gold-500, #C5A059); color: #FFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem;">
+            {{ t.client_name[:1].upper() }}
+          </div>
+          <div>
+            <strong style="display: block; color: var(--color-navy-900); font-size: 0.9375rem;">{{ t.client_name }}</strong>
+            <span class="text-xs text-muted">{{ t.designation }}{% if t.company_name %}, {{ t.company_name }}{% endif %}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CONVERSION CTA SECTION -->
+<section class="section bg-surface">
+  <div class="container">
+    <div class="cta-banner">
+      <div class="cta-content">
+        <span class="badge badge-gold mb-4">Get Expert Advice</span>
+        <h2 class="cta-title">Let's Discuss Your Business</h2>
+        <p class="cta-description">
+          Have a business, accounting, finance, tax or legal documentation requirement? Reach out today to schedule a confidential discussion with our principal advisory team.
+        </p>
+        <div class="cta-actions">
+          <a href="{{ url_for('contact.consultation') }}" class="btn btn-gold btn-lg">Book a Consultation</a>
+          <a href="https://wa.me/919876543210?text=Hello%20MVR%20Associates,%20I%20would%20like%20to%20inquire%20about%20your%20consultancy%20services." target="_blank" rel="noopener noreferrer" class="btn btn-outline-white btn-lg" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

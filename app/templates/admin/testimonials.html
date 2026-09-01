@@ -1,0 +1,94 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Testimonials CMS — MVR Associates Admin{% endblock %}
+{% block header_title %}Testimonials &amp; Client Feedback CMS{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-2" style="gap: 1.5rem;">
+  <!-- LEFT: TESTIMONIALS LIST -->
+  <div class="admin-card">
+    <h2 style="font-size: 1.125rem; color: #FFF; margin-bottom: 1rem;">Client Testimonials</h2>
+    {% if testimonials %}
+      <div style="overflow-x: auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Rating</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for t in testimonials %}
+              <tr>
+                <td>
+                  <strong style="color: #FFF;">{{ t.client_name }}</strong><br>
+                  <span class="text-xs text-muted">{{ t.company_name or 'Independent' }} ({{ t.designation or 'Client' }})</span>
+                </td>
+                <td><span style="color: #FACC15;">★ {{ t.rating }}/5</span></td>
+                <td>
+                  <form method="POST" action="{{ url_for('admin.toggle_testimonial_visibility', testimonial_id=t.id) }}" style="display: inline-block;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm" style="{% if t.is_visible %}background: rgba(34, 197, 94, 0.2); color: #4ADE80; border: 1px solid rgba(34, 197, 94, 0.4);{% else %}background: rgba(148, 163, 184, 0.2); color: #94A3B8; border: 1px solid rgba(148, 163, 184, 0.4);{% endif %} padding: 0.2rem 0.5rem;">
+                      {% if t.is_visible %}Visible{% else %}Hidden{% endif %}
+                    </button>
+                  </form>
+                </td>
+                <td>
+                  <form method="POST" action="{{ url_for('admin.delete_testimonial', testimonial_id=t.id) }}" onsubmit="return confirm('Delete this testimonial?');" style="display: inline-block;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.2rem 0.4rem;">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-muted text-small">No client testimonials added yet.</p>
+    {% endif %}
+  </div>
+
+  <!-- RIGHT: CREATE NEW TESTIMONIAL FORM -->
+  <div class="admin-card">
+    <h2 style="font-size: 1.125rem; color: #FFF; margin-bottom: 1rem;">Add Client Feedback</h2>
+    <form method="POST" action="{{ url_for('admin.create_testimonial') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      <div class="form-group">
+        <label class="form-label" style="color: #94A3B8;">Client Name <span style="color: #EF4444;">*</span></label>
+        <input type="text" name="client_name" required class="form-control" placeholder="e.g. Ankit Sharma" style="background: #090D16; border-color: #334155; color: #FFF;">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" style="color: #94A3B8;">Company / Business</label>
+          <input type="text" name="company_name" class="form-control" placeholder="e.g. Apex Logistix Pvt Ltd" style="background: #090D16; border-color: #334155; color: #FFF;">
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="color: #94A3B8;">Designation</label>
+          <input type="text" name="designation" class="form-control" placeholder="Managing Director" style="background: #090D16; border-color: #334155; color: #FFF;">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" style="color: #94A3B8;">Rating (1 to 5 Stars)</label>
+        <select name="rating" class="form-select" style="background: #090D16; border-color: #334155; color: #FFF;">
+          <option value="5" selected>5 Stars (Excellent)</option>
+          <option value="4">4 Stars (Very Good)</option>
+          <option value="3">3 Stars (Good)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" style="color: #94A3B8;">Testimonial Quote <span style="color: #EF4444;">*</span></label>
+        <textarea name="content" required class="form-textarea" placeholder="Client review or feedback..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 100px;"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-full">Save Client Testimonial</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

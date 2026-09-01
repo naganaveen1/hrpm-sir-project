@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — MVR Associates</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <style>
+    body {
+      background-color: #0B192C;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background-color: #1E293B;
+      border: 1px solid #334155;
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      color: #FFFFFF;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.25rem;
+    }
+
+    .login-sub {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #C5A059;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="text-center mb-6">
+      <h1 class="login-title">MVR ASSOCIATES</h1>
+      <span class="login-sub">Admin Portal Login</span>
+    </div>
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          {% set alert_bg = '#FEE2E2' if category == 'danger' else ('#DCFCE7' if category == 'success' else ('#FEF3C7' if category == 'warning' else '#E0F2FE')) %}
+          {% set alert_border = '#FCA5A5' if category == 'danger' else ('#86EFAC' if category == 'success' else ('#FDE047' if category == 'warning' else '#7DD3FC')) %}
+          {% set alert_color = '#991B1B' if category == 'danger' else ('#166534' if category == 'success' else ('#854D0E' if category == 'warning' else '#075985')) %}
+          <div class="alert alert-{{ category if category != 'message' else 'info' }}" style="margin-bottom: 1.5rem; background: {{ alert_bg }}; border-color: {{ alert_border }}; color: {{ alert_color }}; border-radius: var(--radius-md); padding: 0.85rem 1rem; font-size: 0.875rem; font-weight: 500;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('admin.login') }}{% if request.args.get('next') %}?next={{ request.args.get('next') }}{% endif %}">
+      {% if form %}
+        {{ form.hidden_tag() }}
+      {% else %}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      {% endif %}
+
+      <div class="form-group mb-4">
+        <label for="email" class="form-label" style="color: #94A3B8; font-weight: 600;">Admin Email</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="admin@mvrassociates.com" required style="background: #090D16; border-color: #334155; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md);">
+      </div>
+
+      <div class="form-group mb-4">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <label for="password" class="form-label" style="color: #94A3B8; font-weight: 600; margin: 0;">Password</label>
+          <button type="button" id="togglePasswordBtn" onclick="togglePasswordVisibility()" style="background: none; border: none; color: #C5A059; font-size: 0.75rem; cursor: pointer; font-weight: 600;">Show Password</button>
+        </div>
+        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••••••" required style="background: #090D16; border-color: #334155; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md);">
+      </div>
+
+      <div class="form-group mb-6" style="display: flex; align-items: center; gap: 0.5rem;">
+        <input type="checkbox" id="remember_me" name="remember_me" value="y" style="accent-color: #C5A059; width: 1rem; height: 1rem; cursor: pointer;">
+        <label for="remember_me" style="color: #94A3B8; font-size: 0.875rem; cursor: pointer; user-select: none;">Keep me logged in on this browser</label>
+      </div>
+
+      <div class="mt-6">
+        <button type="submit" class="btn btn-gold btn-lg btn-full" style="width: 100%; padding: 0.85rem; font-weight: 700;">Authenticate &amp; Login</button>
+      </div>
+    </form>
+
+    <div class="text-center mt-6">
+      <a href="{{ url_for('main.index') }}" style="color: #94A3B8; font-size: 0.8125rem; text-decoration: none;">&larr; Back to Public Website</a>
+    </div>
+
+    <script>
+      function togglePasswordVisibility() {
+        const passInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          toggleBtn.textContent = 'Hide Password';
+        } else {
+          passInput.type = 'password';
+          toggleBtn.textContent = 'Show Password';
+        }
+      }
+    </script>
+  </div>
+</body>
+</html>

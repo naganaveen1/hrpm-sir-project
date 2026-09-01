@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <div class="container nav-container">
+    <a href="{{ url_for('main.index') if url_for else '#' }}" class="nav-brand">
+      <span class="nav-brand-title">MVR Associates</span>
+      <span class="nav-brand-subtitle">Business & Legal Consultancy</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="{{ url_for('main.index') if url_for else '#' }}" class="nav-link {% if active_page == 'home' %}active{% endif %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url_for('main.about') if url_for else '#' }}" class="nav-link {% if active_page == 'about' %}active{% endif %}">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url_for('services.index') if url_for else '#' }}" class="nav-link {% if active_page == 'services' %}active{% endif %}">Services</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url_for('main.solutions') if url_for else '#' }}" class="nav-link {% if active_page == 'solutions' %}active{% endif %}">Business Solutions</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url_for('resources.index') if url_for else '#' }}" class="nav-link {% if active_page == 'resources' %}active{% endif %}">Resources</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url_for('contact.index') if url_for else '#' }}" class="nav-link {% if active_page == 'contact' %}active{% endif %}">Contact</a>
+      </li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="{{ url_for('contact.consultation') if url_for else '#' }}" class="btn btn-gold btn-sm">Book Consultation</a>
+    </div>
+  </div>
+</nav>

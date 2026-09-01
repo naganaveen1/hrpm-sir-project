@@ -1,0 +1,100 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Dashboard Overview — MVR Associates Admin{% endblock %}
+{% block header_title %}Overview &amp; Metrics Dashboard{% endblock %}
+
+{% block content %}
+<!-- STATS CARDS GRID -->
+<div class="admin-stats-grid">
+  <div class="stat-card">
+    <span class="stat-label">Total Enquiries</span>
+    <div class="stat-value">{{ total_enquiries }}</div>
+  </div>
+  <div class="stat-card" style="border-left: 3px solid #EAB308;">
+    <span class="stat-label">New Enquiries</span>
+    <div class="stat-value" style="color: #FACC15;">{{ new_enquiries }}</div>
+  </div>
+  <div class="stat-card" style="border-left: 3px solid #C5A059;">
+    <span class="stat-label">Consultations</span>
+    <div class="stat-value" style="color: #C5A059;">{{ total_consultations }}</div>
+  </div>
+  <div class="stat-card" style="border-left: 3px solid #22C55E;">
+    <span class="stat-label">Active Services</span>
+    <div class="stat-value" style="color: #4ADE80;">{{ total_services }}</div>
+  </div>
+</div>
+
+<div class="grid grid-cols-2" style="gap: 1.5rem;">
+  <!-- RECENT ENQUIRIES -->
+  <div class="admin-card">
+    <div class="flex justify-between items-center mb-4">
+      <h3 style="font-size: 1.125rem; color: #FFF; margin: 0;">Recent Contact Enquiries</h3>
+      <a href="{{ url_for('admin.enquiries') }}" class="text-xs text-gold-accent" style="text-decoration: none;">View All &rarr;</a>
+    </div>
+
+    {% if recent_enquiries %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email / Phone</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for enq in recent_enquiries %}
+            <tr>
+              <td style="font-weight: 600;">{{ enq.name }}</td>
+              <td class="text-small text-muted">{{ enq.email }}<br>{{ enq.phone }}</td>
+              <td>
+                <span class="badge {% if enq.status == 'New' %}badge-warning{% elif enq.status == 'Converted' %}badge-success{% else %}badge-navy{% endif %}">
+                  {{ enq.status }}
+                </span>
+              </td>
+              <td class="text-xs text-muted">{{ enq.created_at.strftime('%b %d, %Y') }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-muted text-small">No recent enquiries found.</p>
+    {% endif %}
+  </div>
+
+  <!-- RECENT CONSULTATIONS -->
+  <div class="admin-card">
+    <div class="flex justify-between items-center mb-4">
+      <h3 style="font-size: 1.125rem; color: #FFF; margin: 0;">Recent Consultations</h3>
+      <a href="{{ url_for('admin.consultations') }}" class="text-xs text-gold-accent" style="text-decoration: none;">View All &rarr;</a>
+    </div>
+
+    {% if recent_consultations %}
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Preferred Date/Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cons in recent_consultations %}
+            <tr>
+              <td style="font-weight: 600;">{{ cons.name }}</td>
+              <td class="text-small text-muted">{{ cons.preferred_date }}<br><span class="text-xs">{{ cons.preferred_time }}</span></td>
+              <td>
+                <span class="badge {% if cons.status == 'New' %}badge-warning{% elif cons.status == 'Confirmed' %}badge-gold{% else %}badge-navy{% endif %}">
+                  {{ cons.status }}
+                </span>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-muted text-small">No recent consultation requests found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

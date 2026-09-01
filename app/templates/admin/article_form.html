@@ -1,0 +1,48 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}{% if article %}Edit Article{% else %}Create Article{% endif %} — MVR Associates Admin{% endblock %}
+{% block header_title %}{% if article %}Edit Article: {{ article.title }}{% else %}Create New Article{% endif %}{% endblock %}
+
+{% block content %}
+<div class="admin-card" style="max-width: 800px;">
+  <form method="POST" action="{% if article %}{{ url_for('admin.edit_article', article_id=article.id) }}{% else %}{{ url_for('admin.create_article') }}{% endif %}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Article Title <span style="color: #EF4444;">*</span></label>
+      <input type="text" name="title" value="{{ article.title if article else '' }}" required class="form-control" placeholder="e.g. GST Annual Return Filing Checklist for FY 2025-26" style="background: #090D16; border-color: #334155; color: #FFF;">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" style="color: #94A3B8;">Category <span style="color: #EF4444;">*</span></label>
+        <select name="category" required class="form-select" style="background: #090D16; border-color: #334155; color: #FFF;">
+          {% for cat in ['Business', 'Tax', 'Finance', 'Legal', 'HR'] %}
+            <option value="{{ cat }}" {% if article and article.category == cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" style="color: #94A3B8;">Featured Image URL</label>
+        <input type="url" name="featured_image" value="{{ article.featured_image if article and article.featured_image else '' }}" class="form-control" placeholder="https://images.unsplash.com/..." style="background: #090D16; border-color: #334155; color: #FFF;">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Short Excerpt / Summary <span style="color: #EF4444;">*</span></label>
+      <textarea name="excerpt" required class="form-textarea" placeholder="Brief summary of the article..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 80px;">{{ article.excerpt if article else '' }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="color: #94A3B8;">Article Body Content <span style="color: #EF4444;">*</span></label>
+      <textarea name="content" required class="form-textarea" placeholder="Full article body content..." style="background: #090D16; border-color: #334155; color: #FFF; min-height: 220px;">{{ article.content if article else '' }}</textarea>
+    </div>
+
+    <div class="flex items-center gap-4 mt-6">
+      <button type="submit" class="btn btn-gold">{% if article %}Save Article Changes{% else %}Publish / Save Article{% endif %}</button>
+      <a href="{{ url_for('admin.articles') }}" class="btn btn-secondary" style="color: #94A3B8; border-color: #334155;">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

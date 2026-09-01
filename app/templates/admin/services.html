@@ -1,0 +1,67 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Services CMS — MVR Associates Admin{% endblock %}
+{% block header_title %}Services CMS Catalog Management{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h2 style="font-size: 1.25rem; color: #FFF; margin: 0;">Services Catalog</h2>
+      <span class="text-xs text-muted">Manage core advisory services, detail page content, and active visibility.</span>
+    </div>
+    <a href="{{ url_for('admin.create_service') }}" class="btn btn-gold btn-sm">+ Create New Service</a>
+  </div>
+
+  {% if services %}
+    <div style="overflow-x: auto;">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title &amp; Slug</th>
+            <th>Icon Class</th>
+            <th>Short Summary</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in services %}
+            <tr>
+              <td>#{{ s.id }}</td>
+              <td>
+                <strong style="color: #FFF;">{{ s.title }}</strong><br>
+                <code class="text-xs" style="color: #C5A059;">/services/{{ s.slug }}</code>
+              </td>
+              <td><span class="badge badge-navy">{{ s.icon or 'briefcase' }}</span></td>
+              <td style="max-width: 300px;">
+                <span class="text-small text-muted">{{ s.short_description[:90] }}...</span>
+              </td>
+              <td>
+                <form method="POST" action="{{ url_for('admin.toggle_service_active', service_id=s.id) }}" style="display: inline-block;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-sm" style="{% if s.is_active %}background: rgba(34, 197, 94, 0.2); color: #4ADE80; border: 1px solid rgba(34, 197, 94, 0.4);{% else %}background: rgba(148, 163, 184, 0.2); color: #94A3B8; border: 1px solid rgba(148, 163, 184, 0.4);{% endif %} padding: 0.25rem 0.6rem;">
+                    {% if s.is_active %}Active{% else %}Inactive{% endif %}
+                  </button>
+                </form>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <a href="{{ url_for('admin.edit_service', service_id=s.id) }}" class="btn btn-secondary btn-sm" style="color: #FFF; border-color: #334155; padding: 0.25rem 0.5rem;">Edit</a>
+                  <form method="POST" action="{{ url_for('admin.delete_service', service_id=s.id) }}" onsubmit="return confirm('Are you sure you want to delete this service?');" style="display: inline-block;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.25rem 0.5rem;">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted text-center py-6">No services in database. Click 'Create New Service' above to add one.</p>
+  {% endif %}
+</div>
+{% endblock %}

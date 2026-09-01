@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us — MVR Associates Business & Legal Consultancy{% endblock %}
+
+{% block meta_description %}Get in touch with MVR Associates for expert business, tax, loan, and legal consultancy. Book a consultation or send an inquiry.{% endblock %}
+
+{% block content %}
+<section class="section section-lg bg-surface" style="border-bottom: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Direct Communication</span>
+      <h1 class="text-display mb-4">Contact Our Advisory Team</h1>
+      <p class="text-lead section-subtitle">
+        Have questions regarding accounting, GST returns, business structuring, or legal contracts? Reach out directly to our principal consultants.
+      </p>
+      <div class="mt-4">
+        <div class="credential-pill">
+          M.Com &nbsp;|&nbsp; CMA &nbsp;|&nbsp; LL.B
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-alt">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- LEFT: CONTACT INFORMATION & DIRECT CHANNELS -->
+      <div>
+        <h2 class="mb-4" style="font-size: 1.5rem;">Get In Touch</h2>
+        <p class="text-muted mb-6">
+          Whether you need a full financial audit or strategic tax planning, we respond promptly within 24 business hours.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;">
+          <!-- Phone Card -->
+          <div class="card" style="padding: 1.25rem;">
+            <div class="flex items-center gap-3">
+              <div class="card-icon" style="margin-bottom: 0; width: 42px; height: 42px; flex-shrink: 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div>
+                <span class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Direct Telephone</span>
+                <div style="font-weight: 700; color: var(--color-navy-900);">{{ contact_phone }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email Card -->
+          <div class="card" style="padding: 1.25rem;">
+            <div class="flex items-center gap-3">
+              <div class="card-icon" style="margin-bottom: 0; width: 42px; height: 42px; flex-shrink: 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div>
+                <span class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Email Correspondence</span>
+                <div style="font-weight: 700; color: var(--color-navy-900);">{{ contact_email }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WhatsApp Card -->
+          <div class="card card-featured" style="padding: 1.25rem;">
+            <div class="flex items-center gap-3">
+              <div class="card-icon" style="margin-bottom: 0; width: 42px; height: 42px; background: #25D366; color: #FFF; border-color: #25D366; flex-shrink: 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
+              </div>
+              <div>
+                <span class="text-xs text-muted" style="font-weight: 700; text-transform: uppercase;">Instant WhatsApp</span>
+                <div>
+                  <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: #15803D; text-decoration: none;">Chat Directly on WhatsApp &rarr;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 1.5rem; background: var(--color-navy-900); color: #FFF;">
+          <h4 style="color: #FFF; margin-bottom: 0.5rem;">Schedule a Consultation</h4>
+          <p class="text-small text-muted mb-4" style="color: var(--color-charcoal-300);">
+            Prefer a structured time slot to discuss confidential financial reports or legal strategy?
+          </p>
+          <a href="{{ url_for('contact.consultation') }}" class="btn btn-gold btn-sm btn-full">Book Consultation Slot &rarr;</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: ENQUIRY FORM CONTAINER -->
+      <div>
+        <div class="card card-featured" style="padding: 2.25rem;">
+          <h2 class="mb-2" style="font-size: 1.5rem;">Send an Enquiry</h2>
+          <p class="text-small text-muted mb-6">
+            Please fill out the form below. All communications are held under strict professional confidentiality.
+          </p>
+
+          <form method="POST" action="{{ url_for('contact.index') }}" onsubmit="if(this.checkValidity()){ this.querySelector('button[type=submit]').disabled=true; this.querySelector('button[type=submit]').innerHTML='Sending Inquiry...'; }">
+            {{ form.csrf_token }}
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name" class="form-label">Full Name <span style="color: var(--color-danger-700);">*</span></label>
+                {{ form.name(class="form-control " + ("is-invalid" if form.name.errors else ""), placeholder="e.g. Rajesh Kumar") }}
+                {% for error in form.name.errors %}
+                  <div class="form-error">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address <span style="color: var(--color-danger-700);">*</span></label>
+                {{ form.email(class="form-control " + ("is-invalid" if form.email.errors else ""), placeholder="name@company.com") }}
+                {% for error in form.email.errors %}
+                  <div class="form-error">{{ error }}</div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone Number <span style="color: var(--color-danger-700);">*</span></label>
+                {{ form.phone(class="form-control " + ("is-invalid" if form.phone.errors else ""), placeholder="+91 98765 43210") }}
+                {% for error in form.phone.errors %}
+                  <div class="form-error">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <div class="form-group">
+                <label for="business_name" class="form-label">Business / Enterprise Name</label>
+                {{ form.business_name(class="form-control " + ("is-invalid" if form.business_name.errors else ""), placeholder="e.g. MVR Technologies LLP") }}
+                {% for error in form.business_name.errors %}
+                  <div class="form-error">{{ error }}</div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="service_id" class="form-label">Service Required</label>
+              {{ form.service_id(class="form-select " + ("is-invalid" if form.service_id.errors else "")) }}
+              {% for error in form.service_id.errors %}
+                <div class="form-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Requirements / Message <span style="color: var(--color-danger-700);">*</span></label>
+              {{ form.message(class="form-textarea " + ("is-invalid" if form.message.errors else ""), placeholder="Please provide details regarding your required consultancy services, current business setup, or inquiry...") }}
+              {% for error in form.message.errors %}
+                <div class="form-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mt-6">
+              {{ form.submit(class="btn btn-gold btn-lg btn-full") }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

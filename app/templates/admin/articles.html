@@ -1,0 +1,65 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Articles CMS — MVR Associates Admin{% endblock %}
+{% block header_title %}Knowledge &amp; Articles CMS{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h2 style="font-size: 1.25rem; color: #FFF; margin: 0;">Articles &amp; Publication Management</h2>
+      <span class="text-xs text-muted">Publish business insights, GST compliance guides, and legal updates.</span>
+    </div>
+    <a href="{{ url_for('admin.create_article') }}" class="btn btn-gold btn-sm">+ Create New Article</a>
+  </div>
+
+  {% if articles %}
+    <div style="overflow-x: auto;">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title &amp; Category</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Published Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in articles %}
+            <tr>
+              <td>#{{ a.id }}</td>
+              <td>
+                <strong style="color: #FFF;">{{ a.title }}</strong><br>
+                <span class="badge badge-navy text-xs">{{ a.category }}</span>
+              </td>
+              <td><span class="text-small text-muted">{{ a.author }}</span></td>
+              <td>
+                <form method="POST" action="{{ url_for('admin.toggle_article_published', article_id=a.id) }}" style="display: inline-block;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-sm" style="{% if a.is_published %}background: rgba(34, 197, 94, 0.2); color: #4ADE80; border: 1px solid rgba(34, 197, 94, 0.4);{% else %}background: rgba(234, 179, 8, 0.2); color: #FACC15; border: 1px solid rgba(234, 179, 8, 0.4);{% endif %} padding: 0.25rem 0.6rem;">
+                    {% if a.is_published %}Published{% else %}Draft{% endif %}
+                  </button>
+                </form>
+              </td>
+              <td class="text-xs text-muted">{{ a.created_at.strftime('%b %d, %Y') if a.created_at else 'N/A' }}</td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <a href="{{ url_for('admin.edit_article', article_id=a.id) }}" class="btn btn-secondary btn-sm" style="color: #FFF; border-color: #334155; padding: 0.25rem 0.5rem;">Edit</a>
+                  <form method="POST" action="{{ url_for('admin.delete_article', article_id=a.id) }}" onsubmit="return confirm('Are you sure you want to delete this article?');" style="display: inline-block;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.25rem 0.5rem;">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted text-center py-6">No articles published or drafted yet. Click 'Create New Article' above.</p>
+  {% endif %}
+</div>
+{% endblock %}

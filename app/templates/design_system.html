@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+
+{% block title %}Design System Showcase — MVR Associates{% endblock %}
+
+{% block content %}
+<section class="section bg-alt" style="border-bottom: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag">Brand Identity & UI System</span>
+      <h1 class="text-display">MVR Associates Visual Design System</h1>
+      <p class="text-lead section-subtitle">
+        Comprehensive luxury corporate design tokens, typography scale, inputs, buttons, cards, and interactive components for MVR Associates Business & Legal Consultancy.
+      </p>
+      <div class="mt-4">
+        <div class="credential-pill">
+          M.Com | CMA | LL.B
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container section">
+
+  <!-- 1. Color Palette Section -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">01. Color Palette</span>
+      <h2>Core Brand Palette Tokens</h2>
+    </div>
+    
+    <div class="grid grid-cols-4">
+      <div class="card" style="padding: 1.5rem;">
+        <div style="height: 80px; background-color: var(--color-navy-900); border-radius: 4px; margin-bottom: 0.75rem;"></div>
+        <strong style="display: block;">Deep Navy 900</strong>
+        <span class="text-small text-muted">#0B192C — Primary Brand</span>
+      </div>
+
+      <div class="card" style="padding: 1.5rem;">
+        <div style="height: 80px; background-color: var(--color-gold-500); border-radius: 4px; margin-bottom: 0.75rem;"></div>
+        <strong style="display: block;">Muted Brass Gold</strong>
+        <span class="text-small text-muted">#C5A059 — Accent Token</span>
+      </div>
+
+      <div class="card" style="padding: 1.5rem;">
+        <div style="height: 80px; background-color: var(--color-charcoal-800); border-radius: 4px; margin-bottom: 0.75rem;"></div>
+        <strong style="display: block;">Charcoal 800</strong>
+        <span class="text-small text-muted">#1E293B — Typography</span>
+      </div>
+
+      <div class="card" style="padding: 1.5rem;">
+        <div style="height: 80px; background-color: var(--color-bg-body); border: 1px solid var(--color-border-medium); border-radius: 4px; margin-bottom: 0.75rem;"></div>
+        <strong style="display: block;">Off-White Surface</strong>
+        <span class="text-small text-muted">#F8FAFC — Canvas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Typography Scale Section -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">02. Typography System</span>
+      <h2>Plus Jakarta Sans Hierarchy</h2>
+    </div>
+
+    <div class="card" style="padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+      <div>
+        <span class="text-xs text-muted">Text Display (3.75rem / 800)</span>
+        <div class="text-display">Build. Manage. Grow.</div>
+      </div>
+      <hr style="border: 0; border-top: 1px solid var(--color-border-light);">
+      <div>
+        <span class="text-xs text-muted">Heading 1 (2.75rem / 700)</span>
+        <h1>Professional Business & Legal Consultancy</h1>
+      </div>
+      <hr style="border: 0; border-top: 1px solid var(--color-border-light);">
+      <div>
+        <span class="text-xs text-muted">Heading 2 (2.125rem / 700)</span>
+        <h2>Accounting, Tax & Legal Documentation</h2>
+      </div>
+      <hr style="border: 0; border-top: 1px solid var(--color-border-light);">
+      <div>
+        <span class="text-xs text-muted">Heading 3 (1.5rem / 600)</span>
+        <h3>Strategic Financial Guidance for Growing Companies</h3>
+      </div>
+      <hr style="border: 0; border-top: 1px solid var(--color-border-light);">
+      <div>
+        <span class="text-xs text-muted">Text Lead (1.125rem / 400)</span>
+        <p class="text-lead">MVR Associates offers comprehensive advisory spanning GST compliance, corporate restructuring, debt syndication, and labor legal frameworks.</p>
+      </div>
+      <hr style="border: 0; border-top: 1px solid var(--color-border-light);">
+      <div>
+        <span class="text-xs text-muted">Text Body (1rem / 400)</span>
+        <p class="text-body">Our team brings over a decade of specialized expertise in corporate law, management accounting, and strategic taxation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Button Component Matrix -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">03. Interactive Buttons</span>
+      <h2>Button Variants & Sizes</h2>
+    </div>
+
+    <div class="card" style="padding: 2rem;">
+      <div class="flex" style="flex-wrap: wrap; gap: 1rem; align-items: center;">
+        <button class="btn btn-primary">Primary Navy Button</button>
+        <button class="btn btn-gold">Muted Gold Button</button>
+        <button class="btn btn-secondary">Secondary Outline</button>
+        <button class="btn btn-primary btn-sm">Small Button</button>
+        <button class="btn btn-gold btn-lg">Large Action Button</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Badges & Credentials Section -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">04. Badges & Status Indicators</span>
+      <h2>Pills, Badges & Credential Blocks</h2>
+    </div>
+
+    <div class="card" style="padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+      <div class="flex" style="gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <span class="badge badge-navy">Navy Badge</span>
+        <span class="badge badge-gold">Gold Accent</span>
+        <span class="badge badge-success">Approved / Converted</span>
+        <span class="badge badge-warning">Pending Review</span>
+        <span class="badge badge-danger">Action Required</span>
+      </div>
+
+      <div class="mt-4">
+        <div class="credential-pill">
+          M.Com | CMA | LL.B
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Cards & Services Grid -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">05. Cards & Containers</span>
+      <h2>Interactive & Featured Cards</h2>
+    </div>
+
+    <div class="grid grid-cols-3">
+      <!-- Standard Interactive Card -->
+      <div class="card card-interactive">
+        <div class="card-body">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          </div>
+          <h3>Accounting & Bookkeeping</h3>
+          <p class="text-small text-muted mt-4">Complete financial reporting, ledger maintenance, balance sheet audit, and statutory compliance management.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-secondary btn-sm btn-full">Learn More</a>
+        </div>
+      </div>
+
+      <!-- Featured Gold Border Card -->
+      <div class="card card-interactive card-featured">
+        <div class="card-body">
+          <span class="badge badge-gold mb-4">High Demand</span>
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3>GST & Tax Services</h3>
+          <p class="text-small text-muted mt-4">Timely GST return filing, income tax planning, tax audits, representation before authorities, and assessment defense.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-gold btn-sm btn-full">Learn More</a>
+        </div>
+      </div>
+
+      <!-- Dark Navy Card -->
+      <div class="card card-dark">
+        <div class="card-body">
+          <div class="card-icon" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border-color: rgba(255,255,255,0.2);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3>Legal Documentation</h3>
+          <p class="text-small text-muted mt-4">M.Com, CMA, LL.B backed contract drafting, partnership deeds, NDA creation, and litigation management advisory.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-outline-white btn-sm btn-full">Explore Service</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Form Elements & Inputs -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">06. Form Controls & Validation</span>
+      <h2>Inputs, Selects & Validation States</h2>
+    </div>
+
+    <div class="card" style="padding: 2rem;">
+      <form onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" placeholder="e.g. Rajesh Sharma" value="Rajesh Sharma">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" placeholder="name@company.com" value="rajesh@company.com">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Required Service</label>
+            <select class="form-select">
+              <option>Select consultancy service...</option>
+              <option selected>GST & Tax Advisory</option>
+              <option>Legal Documentation & Contracts</option>
+              <option>Finance & Loan Project Reports</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number (Invalid State Demo)</label>
+            <input type="text" class="form-control is-invalid" value="+91 98765">
+            <div class="form-error">Please enter a valid 10-digit mobile number.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Requirement Message</label>
+          <textarea class="form-textarea" placeholder="Describe your business requirement..."></textarea>
+          <div class="form-hint">Provide details regarding your firm type, turnover, or specific service scope.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Test Form</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 7. Process Timeline Matrix -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">07. Process Architecture</span>
+      <h2>Methodology Timeline (Understand → Improve)</h2>
+    </div>
+
+    <div class="process-timeline">
+      <div class="process-step">
+        <div class="process-number">01</div>
+        <div class="process-title">Understand</div>
+      </div>
+      <div class="process-step">
+        <div class="process-number">02</div>
+        <div class="process-title">Analyse</div>
+      </div>
+      <div class="process-step">
+        <div class="process-number">03</div>
+        <div class="process-title">Plan</div>
+      </div>
+      <div class="process-step">
+        <div class="process-number">04</div>
+        <div class="process-title">Implement</div>
+      </div>
+      <div class="process-step">
+        <div class="process-number">05</div>
+        <div class="process-title">Review</div>
+      </div>
+      <div class="process-step">
+        <div class="process-number">06</div>
+        <div class="process-title">Improve</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Alerts Section -->
+  <section class="mb-12" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="text-label">08. Notification Alerts</span>
+      <h2>Feedback Banners</h2>
+    </div>
+
+    <div class="alert alert-success">
+      <strong>Success:</strong> Your consultation request has been submitted successfully. Our lead consultant will reach out within 24 hours.
+    </div>
+    <div class="alert alert-danger">
+      <strong>Error:</strong> Failed to save form submission. Please check required fields.
+    </div>
+    <div class="alert alert-warning">
+      <strong>Notice:</strong> Your GST tax filing deadline is approaching in 5 days.
+    </div>
+    <div class="alert alert-info">
+      <strong>Information:</strong> New regulatory update on labor law compliance available in Resources.
+    </div>
+  </section>
+
+  <!-- 9. CTA Banner Section -->
+  <section>
+    <div class="section-header">
+      <span class="text-label">09. CTA Banner Component</span>
+      <h2>High-Conversion Banner</h2>
+    </div>
+    {% include 'components/cta_banner.html' %}
+  </section>
+
+</div>
+{% endblock %}

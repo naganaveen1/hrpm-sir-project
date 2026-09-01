@@ -1,0 +1,89 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Enquiries Management — MVR Associates Admin{% endblock %}
+{% block header_title %}Enquiries Management{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+  <!-- SEARCH AND FILTER BAR -->
+  <form method="GET" action="{{ url_for('admin.enquiries') }}" class="flex justify-between items-center mb-6" style="gap: 1rem; flex-wrap: wrap;">
+    <div class="flex items-center gap-3" style="flex: 1; min-width: 250px;">
+      <input type="text" name="q" value="{{ search_query or '' }}" placeholder="Search by name, email, phone, or business..." class="form-control" style="background: #090D16; border-color: #334155; color: #FFF;">
+      <select name="status" class="form-select" style="background: #090D16; border-color: #334155; color: #FFF; width: 180px;">
+        <option value="">All Statuses</option>
+        <option value="New" {% if status_filter == 'New' %}selected{% endif %}>New</option>
+        <option value="Contacted" {% if status_filter == 'Contacted' %}selected{% endif %}>Contacted</option>
+        <option value="In Progress" {% if status_filter == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Converted" {% if status_filter == 'Converted' %}selected{% endif %}>Converted</option>
+        <option value="Closed" {% if status_filter == 'Closed' %}selected{% endif %}>Closed</option>
+      </select>
+      <button type="submit" class="btn btn-gold btn-sm">Filter</button>
+      {% if search_query or status_filter %}
+        <a href="{{ url_for('admin.enquiries') }}" class="btn btn-secondary btn-sm" style="color: #94A3B8; border-color: #334155;">Reset</a>
+      {% endif %}
+    </div>
+  </form>
+
+  <!-- ENQUIRIES TABLE -->
+  {% if enquiries %}
+    <div style="overflow-x: auto;">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Client Info</th>
+            <th>Service Interested</th>
+            <th>Message Snippet</th>
+            <th>Status</th>
+            <th>Received Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for enq in enquiries %}
+            <tr>
+              <td>#{{ enq.id }}</td>
+              <td>
+                <strong style="color: #FFF;">{{ enq.name }}</strong>
+                {% if enq.business_name %}<br><span class="text-xs text-gold-accent">{{ enq.business_name }}</span>{% endif %}
+                <br><span class="text-xs text-muted">{{ enq.email }} | {{ enq.phone }}</span>
+              </td>
+              <td>
+                {% if enq.service %}
+                  <span class="badge badge-navy">{{ enq.service.title }}</span>
+                {% else %}
+                  <span class="text-muted text-xs">General Inquiry</span>
+                {% endif %}
+              </td>
+              <td style="max-width: 250px;">
+                <span class="text-small text-muted">{{ enq.message[:100] }}{% if enq.message|length > 100 %}...{% endif %}</span>
+              </td>
+              <td>
+                <!-- STATUS UPDATE FORM -->
+                <form method="POST" action="{{ url_for('admin.update_enquiry_status', enquiry_id=enq.id) }}" style="display: inline-block;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <select name="status" onchange="this.form.submit()" class="form-select text-xs" style="padding: 0.25rem 0.5rem; background: #090D16; border-color: #334155; color: #FFF;">
+                    {% for st in ['New', 'Contacted', 'In Progress', 'Converted', 'Closed'] %}
+                      <option value="{{ st }}" {% if enq.status == st %}selected{% endif %}>{{ st }}</option>
+                    {% endfor %}
+                  </select>
+                </form>
+              </td>
+              <td class="text-xs text-muted">{{ enq.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+              <td>
+                <!-- DELETE FORM -->
+                <form method="POST" action="{{ url_for('admin.delete_enquiry', enquiry_id=enq.id) }}" onsubmit="return confirm('Are you sure you want to delete this enquiry?');" style="display: inline-block;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.25rem 0.5rem;">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted text-center py-6">No enquiries match your search criteria.</p>
+  {% endif %}
+</div>
+{% endblock %}

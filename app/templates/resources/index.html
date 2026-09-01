@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+
+{% block title %}Knowledge &amp; Executive Insights — MVR Associates{% endblock %}
+{% block meta_description %}Explore strategic business commentary, statutory GST compliance guides, financial reports advice, and corporate legal updates by MVR Associates.{% endblock %}
+
+{% block content %}
+<!-- HERO HEADER WITH SEARCH BAR -->
+<section class="section bg-dark text-center" style="background: linear-gradient(135deg, var(--color-navy-950) 0%, var(--color-navy-900) 100%); padding-top: 4rem; padding-bottom: 4.5rem; border-bottom: 1px solid rgba(197, 160, 89, 0.25);">
+  <div class="container">
+    <div class="section-header text-center" style="margin-bottom: 2.5rem;">
+      <span class="section-tag">Insights &amp; Advisory</span>
+      <h1 class="text-display mb-4" style="color: #FFFFFF;">Business, Tax &amp; Legal Insights</h1>
+      <p class="text-lead section-subtitle" style="color: var(--color-charcoal-300); max-width: 720px;">
+        Authoritative statutory compliance checklists, financial CMA insights, and legal commentary curated by M.Com, CMA &amp; LL.B qualified principal consultants.
+      </p>
+    </div>
+
+    <!-- EXECUTIVE SEARCH BAR -->
+    <div class="container-narrow" style="max-width: 640px; margin: 0 auto;">
+      <form method="GET" action="{{ url_for('resources.index') }}" style="display: flex; gap: 0.75rem; background: rgba(255, 255, 255, 0.05); padding: 0.5rem; border-radius: var(--radius-xl); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: var(--shadow-xl);">
+        {% if selected_category %}
+          <input type="hidden" name="category" value="{{ selected_category }}">
+        {% endif %}
+        <div style="position: relative; flex: 1;">
+          <input type="text" name="q" value="{{ search_query }}" placeholder="Search tax guides, GST checklists, or legal topics..." class="form-control" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); color: #FFFFFF; border-radius: var(--radius-lg); padding: 0.85rem 1.25rem 0.85rem 2.75rem; font-size: 0.9375rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-gold-400);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <button type="submit" class="btn btn-gold" style="padding: 0.85rem 1.75rem; border-radius: var(--radius-lg); font-weight: 700;">Search</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT AREA -->
+<section class="section bg-body">
+  <div class="container">
+
+    <!-- CATEGORY FILTER TABS -->
+    <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--color-border-light);">
+      <a href="{{ url_for('resources.index', q=search_query) }}" class="btn btn-sm {% if not selected_category %}btn-gold{% else %}btn-secondary{% endif %}" style="padding: 0.5rem 1.25rem; font-weight: 600;">
+        All Topics
+      </a>
+      {% for cat in categories %}
+        <a href="{{ url_for('resources.index', category=cat, q=search_query) }}" class="btn btn-sm {% if selected_category == cat %}btn-gold{% else %}btn-secondary{% endif %}" style="padding: 0.5rem 1.25rem; font-weight: 600;">
+          {{ cat }}
+        </a>
+      {% endfor %}
+    </div>
+
+    {% if articles %}
+      <!-- FEATURED HERO ARTICLE (Rendered when no search query filter is active) -->
+      {% if not search_query and not selected_category and articles|length > 0 %}
+        {% set hero = articles[0] %}
+        <div class="card card-interactive fade-up visible" style="margin-bottom: 3.5rem; border: 1px solid var(--color-border-medium); border-left: 4px solid var(--color-gold-500); overflow: hidden; background: #FFFFFF;">
+          <div class="grid grid-cols-2" style="gap: 0; align-items: stretch;">
+            <!-- HERO IMAGE / PATTERN BANNER -->
+            <div style="min-height: 320px; position: relative; background: linear-gradient(135deg, var(--color-navy-950) 0%, var(--color-navy-850) 100%); overflow: hidden;">
+              {% if hero.featured_image %}
+                <img src="{{ hero.featured_image }}" alt="{{ hero.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+              {% else %}
+                <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 2.5rem; background: radial-gradient(circle at top right, rgba(197, 160, 89, 0.15), transparent 70%), linear-gradient(135deg, #0B192C 0%, #1E293B 100%);">
+                  <span class="text-label" style="color: var(--color-gold-400); margin-bottom: 0.5rem;">FEATURED ADVISORY GUIDE</span>
+                  <div style="font-family: var(--font-family-serif); font-size: 1.75rem; color: #FFFFFF; font-weight: 700; line-height: 1.3;">
+                    {{ hero.title }}
+                  </div>
+                  <div style="margin-top: 1.5rem; font-size: 0.8125rem; color: var(--color-gold-200); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">
+                    MVR Associates Executive Insights
+                  </div>
+                </div>
+              {% endif %}
+              <div style="position: absolute; top: 1.25rem; left: 1.25rem;">
+                <span class="badge badge-gold">{{ hero.category }}</span>
+              </div>
+            </div>
+
+            <!-- HERO CONTENT BODY -->
+            <div style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                  <span class="text-xs text-muted" style="font-weight: 600;">
+                    Published {{ hero.created_at.strftime('%B %d, %Y') }}
+                  </span>
+                  <span style="color: var(--color-border-medium);">&bull;</span>
+                  <span class="text-xs" style="color: var(--color-gold-600); font-weight: 700;">
+                    5 Min Read
+                  </span>
+                </div>
+                <h2 style="font-size: 1.625rem; font-weight: 800; color: var(--color-navy-900); margin-bottom: 1rem; line-height: 1.3;">
+                  <a href="{{ url_for('resources.detail', slug=hero.slug) }}" style="color: inherit; text-decoration: none;">
+                    {{ hero.title }}
+                  </a>
+                </h2>
+                <p class="text-body text-muted mb-6" style="line-height: 1.65;">
+                  {{ hero.excerpt }}
+                </p>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 1.25rem; border-top: 1px solid var(--color-border-light);">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-navy-100); color: var(--color-navy-900); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem; border: 1px solid var(--color-navy-700);">
+                    MVR
+                  </div>
+                  <div>
+                    <div style="font-size: 0.8125rem; font-weight: 700; color: var(--color-navy-900);">MVR Advisory Team</div>
+                    <div style="font-size: 0.6875rem; color: var(--color-charcoal-500);">M.Com | CMA | LL.B</div>
+                  </div>
+                </div>
+                <a href="{{ url_for('resources.detail', slug=hero.slug) }}" class="btn btn-gold btn-sm" style="font-weight: 700;">
+                  Read Featured Article &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- SECONDARY ARTICLES GRID -->
+      <div style="margin-bottom: 2rem;">
+        {% if not search_query and not selected_category and articles|length > 0 %}
+          <h3 class="text-h3 mb-6" style="color: var(--color-navy-900); display: flex; align-items: center; gap: 0.75rem;">
+            <span>Recent Publication Library</span>
+            <span style="height: 1px; flex: 1; background: var(--color-border-light);"></span>
+          </h3>
+        {% endif %}
+
+        <div class="grid grid-cols-3" style="gap: 2rem;">
+          {% for article in (articles[1:] if (not search_query and not selected_category and articles|length > 0) else articles) %}
+            <article class="card card-interactive flex flex-col justify-between fade-up visible">
+              <!-- CARD IMAGE OR EXECUTIVE PATTERN -->
+              <div style="height: 190px; width: 100%; overflow: hidden; position: relative; background: var(--color-navy-900);">
+                {% if article.featured_image %}
+                  <img src="{{ article.featured_image }}" alt="{{ article.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                  <div style="height: 100%; background: linear-gradient(135deg, #0B192C 0%, #1E293B 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem;">
+                    <span class="badge badge-navy" style="align-self: flex-start; background: rgba(255,255,255,0.1); color: var(--color-gold-400); border: 1px solid rgba(197, 160, 89, 0.3);">
+                      {{ article.category }}
+                    </span>
+                    <div>
+                      <div style="font-size: 0.6875rem; font-weight: 700; color: var(--color-gold-400); text-transform: uppercase; letter-spacing: 0.1em;">STATUTORY ADVISORY</div>
+                      <div style="font-size: 0.9375rem; color: #FFFFFF; font-weight: 700; margin-top: 0.25rem;">MVR Associates</div>
+                    </div>
+                  </div>
+                {% endif %}
+                <div style="position: absolute; top: 1rem; left: 1rem;">
+                  <span class="badge badge-gold">{{ article.category }}</span>
+                </div>
+              </div>
+
+              <!-- CARD CONTENT -->
+              <div class="card-body" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">
+                <div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                    <span class="text-xs text-muted" style="font-weight: 600;">
+                      {{ article.created_at.strftime('%b %d, %Y') }}
+                    </span>
+                    <span class="text-xs text-muted" style="font-weight: 600;">
+                      4 min read
+                    </span>
+                  </div>
+                  <h3 class="text-h4 mb-3" style="line-height: 1.4; color: var(--color-navy-900);">
+                    <a href="{{ url_for('resources.detail', slug=article.slug) }}" style="color: inherit; text-decoration: none;">
+                      {{ article.title }}
+                    </a>
+                  </h3>
+                  <p class="text-small text-muted mb-4" style="line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                    {{ article.excerpt }}
+                  </p>
+                </div>
+
+                <div class="card-footer" style="padding: 1rem 0 0 0; background: transparent; border-top: 1px solid var(--color-border-light); margin-top: 1rem;">
+                  <a href="{{ url_for('resources.detail', slug=article.slug) }}" class="text-small" style="color: var(--color-gold-600); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;">
+                    Read Full Article &rarr;
+                  </a>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <!-- EMPTY STATE -->
+      <div class="card text-center fade-up visible" style="max-width: 600px; margin: 3rem auto; padding: 4rem 2rem;">
+        <div class="card-icon" style="margin: 0 auto 1.5rem auto; width: 56px; height: 56px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <h3 class="text-h3 mb-2" style="color: var(--color-navy-900);">No Publications Found</h3>
+        <p class="text-body text-muted mb-6">We couldn't find any resources matching your search query or selected category filter.</p>
+        <a href="{{ url_for('resources.index') }}" class="btn btn-gold" style="font-weight: 700;">Reset Filters &amp; View All</a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- CTA BANNER COMPONENT -->
+<section class="section section-sm bg-surface" style="border-top: 1px solid var(--color-border-light);">
+  <div class="container">
+    <div class="cta-banner">
+      <div class="cta-content">
+        <span class="section-tag" style="background: rgba(197, 160, 89, 0.15); border-color: rgba(197, 160, 89, 0.3); color: var(--color-gold-400);">Confidential Advisory</span>
+        <h2 class="cta-title">Need Specialized Business, Tax or Legal Guidance?</h2>
+        <p class="cta-description">
+          Schedule a direct consultation with our principal advisors to address your company's specific compliance, financial report, or legal documentation needs.
+        </p>
+        <div class="cta-actions">
+          <a href="{{ url_for('contact.consultation') }}" class="btn btn-gold btn-lg">Book Consultation Slot &rarr;</a>
+          <a href="{{ url_for('contact.index') }}" class="btn btn-outline-white btn-lg">General Enquiry</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

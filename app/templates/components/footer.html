@@ -1,0 +1,58 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand-title">MVR Associates</div>
+        <div class="footer-brand-sub">Business & Legal Consultancy</div>
+        <p class="text-small text-muted mb-4">
+          Professional consultancy services in Accounting, GST & Taxation, Finance, Business Advisory, Legal Documentation, and HR/Payroll support.
+        </p>
+        <div class="credential-pill" style="background: rgba(255,255,255,0.05); color: #FFFFFF; border-color: rgba(255,255,255,0.1); border-left-color: var(--color-gold-500);">
+          M.Com | CMA | LL.B
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title">Services</h4>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('services.detail', slug='accounting-bookkeeping') if url_for else '#' }}" class="footer-link">Accounting & Bookkeeping</a></li>
+          <li><a href="{{ url_for('services.detail', slug='gst-taxation') if url_for else '#' }}" class="footer-link">GST & Tax Services</a></li>
+          <li><a href="{{ url_for('services.detail', slug='business-consultancy') if url_for else '#' }}" class="footer-link">Business Consultancy</a></li>
+          <li><a href="{{ url_for('services.detail', slug='finance-loan-assistance') if url_for else '#' }}" class="footer-link">Finance & Loan Assistance</a></li>
+          <li><a href="{{ url_for('services.detail', slug='legal-documentation') if url_for else '#' }}" class="footer-link">Legal Documentation</a></li>
+          <li><a href="{{ url_for('services.detail', slug='hr-payroll-consultancy') if url_for else '#' }}" class="footer-link">HR & Payroll Consultancy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('main.about') if url_for else '#' }}" class="footer-link">About MVR Associates</a></li>
+          <li><a href="{{ url_for('main.solutions') if url_for else '#' }}" class="footer-link">Business Solutions</a></li>
+          <li><a href="{{ url_for('resources.index') if url_for else '#' }}" class="footer-link">Knowledge Center</a></li>
+          <li><a href="{{ url_for('contact.index') if url_for else '#' }}" class="footer-link">Contact Us</a></li>
+          <li><a href="{{ url_for('contact.consultation') if url_for else '#' }}" class="footer-link">Book Consultation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title">Legal & Office</h4>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('main.privacy') if url_for else '#' }}" class="footer-link">Privacy Policy</a></li>
+          <li><a href="{{ url_for('main.terms') if url_for else '#' }}" class="footer-link">Terms & Conditions</a></li>
+          <li><a href="{{ url_for('main.disclaimer') if url_for else '#' }}" class="footer-link">Disclaimer</a></li>
+          <li><a href="{{ url_for('admin.login') if url_for else '#' }}" class="footer-link">Admin Portal</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        &copy; 2026 MVR Associates. All Rights Reserved. Business & Legal Consultancy.
+      </div>
+      <div>
+        Designed & Built for High-Performance Consultancy
+      </div>
+    </div>
+  </div>
+</footer>
